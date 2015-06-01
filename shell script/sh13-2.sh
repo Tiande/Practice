@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 # Program:
 #     Repeat question until user input correct answer.
 # History:
@@ -8,6 +8,6 @@ export PATH
 
 until [ "$yn" == "yes" -o "$yn" == "YES" ]
 do
-    read -p "Please input yes/YES to stop this program: " yn
+    read -p "Please input yes/YES to stop this program: " yn 
 done
 echo "OK! You input the correct answer."
