@@ -2,6 +2,11 @@
 # -*- coding: utf-8 -*-
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
+classmates = ['Bob','Jessey','Tommy']
+print(classmates,'\n','The len of this list is:',len(classmates),'\n',classmates[0],'\n',classmates[1],'\n',classmates[-1])
+classmates.append('Adam')
+print(classmates,'\n')
+
 print('Hello, %s' % 'World')
 print('Hi, %s, you have $%d.' % ('Michael', 1000000),'\n')
 
