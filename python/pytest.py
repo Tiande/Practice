@@ -2,24 +2,102 @@
 # -*- coding: utf-8 -*-
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
+print(abs(100))
 
-names = ['Bob', 'Jany', 'Lucy']
-for name in names:
-	print(name)
+'''
+t1 = (1, 2, 3)
+t2 = (1, [2, 3])
+s = set(t1)
+print(s)
+# s = set(t2)
+# print(s)
+d = {t1: 20}
+print(d)
+print(d[t1])
+# d = {t2}
+# print(d)
+'''
+
+
+'''
+# set()
+s = set([1, 2, 3])
+print(s)
+s = set([1, 2, 3, 1, 3,  2, 3])
+print(s)
+s.add(4)
+print(s)
+s.remove(2)
+print(s)
+
+s1 = set([1, 2, 3])
+s2 = set([2, 3, 4])
+print(s1 & s2)
+print(s1 | s2)
+'''
+
+
+'''
+# dict{}
+d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
+print(d)
+print(d['Michael'])
+d['adam'] = 67
+print(d['adam'])
+d['adam'] = 68
+print(d['adam'])
+d['99'] = 'hahaha'
+print(d['99'])
+
+if 'lambert' in d:
+    print('true')
+else:
+    print('false')
+
+print(d.get('adam'))
+print(d.get('lambert'))
+print(d.get('lambert', 'Don\'t have this value'))
+
+print(d.pop('Bob'))
+'''
+
+
+
+# names = ['Bob', 'Jany', 'Lucy']
+# for name in names:
+# 	print(name)
+# sum = 0
+# for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+# 	sum = sum + x
+# 	print(sum)
+'''
+print(list(range(5)))
+
 sum = 0
-for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
-	sum = sum + x
-	print(sum)
+for x in range(101):
+    sum = sum + x
+    print(sum)
 
+sum = 0
+n = 99
+while n > 0:
+    sum = sum + n
+    n = n - 2
+    print(sum)
+
+L = ['a','b','c']
+for l in L:
+    print(l)
+'''
 
 # age = int(input('input your age here: '))
 # if age >= 18:
-	# print('Your age is: ', age)
-	# print('adult')
+#     print('Your age is: ', age)
+#     print('adult')
 # elif age <= 6:
-	# print('Oh, baby')
+#     print('Oh, baby')
 # else:
-	# print('teenager')
+#     print('teenager')
 
 
 # tuple
@@ -62,7 +140,7 @@ for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 # print(len('中文'.encode('utf-8')),'\n')
 
 # print(b'ABC'.decode('ascii'))
-print(b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8'),'\n')
+# print(b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8'),'\n')
 
 # print('ABC'.encode('ascii'))
 # print('中文'.encode('utf-8'),'\n')
@@ -96,3 +174,4 @@ print(b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8'),'\n')
 # print('Your name is: ',name,'\n')
 
 # print('Hello World','\n')
+
