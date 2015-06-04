@@ -10,7 +10,8 @@ sum = 0
 for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 	sum = sum + x
 	print(sum)
-
+	
+	
 # age = int(input('input your age here: '))
 # if age >= 18:
 	# print('Your age is: ', age)
@@ -74,7 +75,7 @@ for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 	# print('True')
 # else:
 	# print('False','\n')
-
+	
 # print('''line1
 # line2
 # line3
