@@ -10,8 +10,8 @@ sum = 0
 for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 	sum = sum + x
 	print(sum)
-	
-	
+
+
 # age = int(input('input your age here: '))
 # if age >= 18:
 	# print('Your age is: ', age)
@@ -20,8 +20,8 @@ for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 	# print('Oh, baby')
 # else:
 	# print('teenager')
-	
-	
+
+
 # tuple
 # classmates = ('Michael', 'Bob', 'Tracy')
 # t = (1) # t = 1
@@ -62,7 +62,7 @@ for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 # print(len('中文'.encode('utf-8')),'\n')
 
 # print(b'ABC'.decode('ascii'))
-# print(b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8'),'\n')
+print(b'\xe4\xb8\xad\xe6\x96\x87'.decode('utf-8'),'\n')
 
 # print('ABC'.encode('ascii'))
 # print('中文'.encode('utf-8'),'\n')
@@ -75,7 +75,7 @@ for x in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 	# print('True')
 # else:
 	# print('False','\n')
-	
+
 # print('''line1
 # line2
 # line3
