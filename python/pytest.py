@@ -2,7 +2,35 @@
 # -*- coding: utf-8 -*-
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
+
+
+def my_abs():
+    pass
+print('pass',my_abs())
+
+
+
+def my_abs(x):
+    if not isinstance(x, (int, float)):
+        raise TypeError('bad operand type')
+    if x >= 0:
+        return x
+    else:
+        return -x
+
+print(my_abs(-9))
+print(my_abs(12))
+
+
+'''
 print(abs(100))
+print(max(2, 3, 1 ,-21))
+print(int('123'))
+print(float(12.2323))
+print(str(1.23))
+print(bool(1))
+print(hex(567))
+'''
 
 '''
 t1 = (1, 2, 3)
@@ -175,3 +203,5 @@ for l in L:
 
 # print('Hello World','\n')
 
+
+~/Practice/python/pytest.py
