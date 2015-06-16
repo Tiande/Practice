@@ -3,6 +3,29 @@
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+
+'''
+# 汉诺塔 (并不明白...)
+def move(n, a, b, c):
+    """docstring for move"""
+    if n<1:
+        return
+
+    if n==1:
+        print(a, '-->', c)
+
+    if n!=1:
+        move(n-1, a, c, b) # 将前n-1个盘子从a移动到b上
+        move(1, a, b, c) # 将最底下的最后一个盘子从a移动到c上
+        move(n-1, b, a, c) # 将b上的n-1个盘子移动到c上
+n = input('pls input number:')
+move(int(n), 'A', 'B', 'C')
+'''
+
+
+
+
+'''
 # recursion
 def fact(n):
     """docstring for fact"""
@@ -13,6 +36,24 @@ print(fact(1))
 print(fact(4))
 print(fact(100))
 # print(fact(1000)) # 将会 栈溢出
+
+# 尾递归：函数返回时，调用自身，并且，return 不能包含表达式。
+# 这种方式只占用一个栈帧，不会有栈溢出情况
+def fact(n):
+    return fact_iter(n, 1)
+
+def fact_iter(num, product):
+    if num == 1:
+        return product
+    return fact_iter(num - 1, num * product)
+
+print(fact(25))
+print(fact(1000))
+# 尾递归 和 循环 等价
+# Python标准的解释器没有针对尾递归做优化，任何递归函数都存在栈溢出的问题
+'''
+
+
 
 
 '''
