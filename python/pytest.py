@@ -3,7 +3,185 @@
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+# recursion
+def fact(n):
+    """docstring for fact"""
+    if n==1:
+        return 1
+    return n * fact(n - 1)
+print(fact(1))
+print(fact(4))
+print(fact(100))
+# print(fact(1000)) # 将会 栈溢出
 
+
+'''
+# 参数组合：
+# 参数定义顺序： 必选参数 默认参数 可变参数/命名关键字参数 关键字参数
+def f1(a, b, c=0, *args, **kw):
+    """docstring for f1"""
+    print('a:', a, 'b:', b, 'c:', c, 'args:', args, 'kw:', kw)
+def f2(a, b, c=0, *, d, **kw):
+    """docstring for f2"""
+    print('a:', a, 'b:', b, 'c:', c, 'd:', d, 'kw:', kw)
+f1(1, 2)
+f1(1, 2, c=3)
+f1(1, 2, 3, 'a', 'b') # **kw 将参数型的值转为 dict 显示，所以 'a' 'b' 在这里被视为是 args 的值。
+f1(1, 2, 3, 'a', 'b', x=99)
+f2(1, 2, d=99, ext=None)
+
+# 通过 tuple dict 调用
+args = (1, 2, 3, 4)
+kw = {'d': 99, 'x': '#'}
+f1(*args, **kw)
+
+args = (1, 2, 3)
+kw = {'d': 99, 'x': '#'}
+f2(*args, **kw)
+'''
+
+
+
+
+'''
+# 命名关键字参数
+# 下面例子的检查，显然并没有什么卵用
+def person(name, age, **kw):
+    """docstring for person"""
+    if 'city' in kw:
+        pass
+    if 'job' in kw:
+        pass
+    print('name:', name, 'age:', age, 'other:', kw)
+person('Jack', 24, city='Beijing', addr='Chaoyang')
+
+# * 为特使分隔符， * 后的参数被视为 命名关键字参数
+def person(name, age, *, city='Beijing', job):
+    """docstring for person"""
+    print(name, age, city, job)
+person('Jack', 25, city='Beijing', job='Engineer')
+person('Jack', 25, job='Engineer')
+# 该方式必须传入参数名
+# 下面的会报错
+# person('Jack', 25, 'Beijing', 'Engineer')
+'''
+
+
+
+
+'''
+# 可变参数
+def calc(*numbers):
+    """docstring for calc"""
+    sum = 0
+    for n in numbers:
+        sum = sum + n * n
+    print(sum)
+calc(1, 4)
+calc(2, 6, 3)
+nums = [1, 2, 3]
+calc(nums[0], nums[1], nums[2])
+# 在 list tuple 前加 '*'， 把两者元素变为可变参数传入
+calc(*nums)
+
+# 关键字参数
+# 传入的关键字将在函数内部自动组装成为一个 dict
+def person(name, age, **kw):
+    """docstring for person"""
+    print('name:', name, 'age:', age, 'other:', kw)
+person('Michael', 30)
+person('Bob', 35, city='Beijing')
+person('Adam', 45, gender='M', job='Engineer')
+extra = {'city': 'Beijing', 'job': 'Engineer'}
+person('Jack', 24, city=extra['city'], job=extra['job'])
+person('Ben', 35, **extra) #
+'''
+
+
+
+
+
+
+
+'''
+def add_end(L=[]):
+    """docstring for add_end"""
+    L.append('END')
+    print(L)
+
+add_end([1, 2, 3])
+# L 指向的 '[]' 参数在附加 'END' ， L 最好还是指向 不变的对象
+add_end()
+add_end()
+add_end()
+# 修改后的函数
+def add_end2(L=None):
+    """docstring for add_end2"""
+    if L is None:
+        L = []
+    L.append('END')
+    print(L)
+add_end2()
+add_end2()
+add_end2()
+'''
+
+'''
+def enroll(name, age, city='Shanghai', country='China'):
+    print('name:', name)
+    print('age:', age)
+    print('city:', city)
+    print('country:', country)
+
+enroll('Tiande', 14)
+
+enroll('DS', 12, country='Xian')
+'''
+
+
+
+
+
+'''
+def power(x):
+   return x * x
+
+print(power(4))
+
+# n's default value is 2 ;)
+def powers(x, n=2):
+    """docstring for powers"""
+    s = 1
+    while n > 0:
+        n = n - 1
+        s = s * x
+    return s
+print(powers(5, 2))
+print(powers(16, 2))
+print(powers(6))
+'''
+
+
+
+'''
+import math
+
+def move(x, y, step, angle=0):
+    nx = x + step * math.cos(angle)
+    ny = y - step * math.sin(angle)
+    return nx, ny
+
+x, y = move(100, 100, 60, math.pi / 6)
+print(x, y)
+
+r = move(100, 100, 60, math.pi / 6)
+print(r)
+
+print(math.sqrt(2))
+'''
+
+
+'''
 def my_abs():
     pass
 print('pass',my_abs())
@@ -20,6 +198,7 @@ def my_abs(x):
 
 print(my_abs(-9))
 print(my_abs(12))
+'''
 
 
 '''
@@ -204,8 +383,4 @@ for l in L:
 # print('Hello World','\n')
 
 
-~/Practice/python/pytest.py
-
-
-
-
+# ~/Practice/python/pytest.py
