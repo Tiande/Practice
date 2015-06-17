@@ -4,6 +4,99 @@
 
 
 '''
+# 杨辉三角
+def triangles():
+    a = [1];
+    while True:
+        yield a
+        a = [sum(i) for i in zip([0] + a, a + [0])]
+result = triangles()
+i = 1
+for a in result:
+    i = i + 1
+    print(a)
+    if i > 10:
+        break
+'''
+
+'''
+# 生成器 generator
+L = [x * x for x in range(10)]
+print(L)
+g = (x * x for x in range(10)) # This is a generator, 用来保存算法
+print(g)
+for n in g:
+    print(n)
+
+# fib function
+def fib(max):
+    """docstring for fib"""
+    n, a, b = 0, 0, 1
+    while n < max:
+        print(b)
+        a, b = b, a+b
+        n = n + 1
+    return 'done'
+print(fib(6))
+print('value value1 value3'.split())
+'''
+'''
+
+# fib with generator
+# use yield
+def fibs(max):
+    """docstring for fib"""
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a+b
+        n = n + 1
+    return 'done'
+f = fibs(6)
+print(f)
+for n in f:
+    print(n)
+# 但是用for循环调用generator时，发现拿不到generator的return语句的返回值。如果想要拿到返回值，必须捕获StopIteration错误，返回值包含在StopIteration的value中
+g = fibs(6)
+while True:
+    try:
+        x = next(g)
+        print(x)
+    except StopIteration as e:
+        print('Generator return value:', e.value)
+        break
+# 调用 next() 时，遇到 yield 语句返回， 再次执行时从上次返回的 yield 处继续执行
+def odd():
+    """docstring for odd"""
+    print('step 1')
+    yield 1
+    print('step 2')
+    yield(3)
+    print('step 3')
+    yield(5)
+o = odd()
+print(next(o))
+print(next(o))
+print(next(o))
+
+'''
+'''
+# 建议使用 for 循环
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+print(next(g))
+# print(next(g)) # 超出索引
+'''
+
+
+'''
 # 列表生成式
 print(list(range(1, 11)))
 print([x * x for x in range(1, 11)])
