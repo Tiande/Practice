@@ -3,6 +3,32 @@
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+# 切片
+'''
+L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+r = []
+n = 3
+for i in range(n):
+    r.append(L[i])
+print(r)
+
+print(L[0:3])
+print(L[:3])
+print(L[-2:])
+print(L[-2:-1])
+'''
+
+
+N = list(range(100))
+# 前十个数，每两个取一个
+print(N[:10:2])
+# 所有数，每五个取一个
+print(N[::5])
+# 复制一个list
+print(N[:])
+
+
+
 
 '''
 # 汉诺塔 (并不明白...)
