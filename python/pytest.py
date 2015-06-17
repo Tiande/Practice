@@ -1,9 +1,54 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
+# http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
+
+
+'''
+# 列表生成式
+print(list(range(1, 11)))
+print([x * x for x in range(1, 11)])
+print([x * x for x in range(1, 11) if x % 2 == 0])
+# 两层循环，生成全排列
+print([m + n for m in 'ABC' for n in 'XYZ'])
+
+import os
+print([d for d in os.listdir('.')]) # os.listdir 列出文件和目录
+
+# for同时使用两个甚至更多变量
+d = {'x': 'A', 'y': 'B', 'z': 'C'}
+for k, v in d.items():
+    print(k, '=', v)
+print([k + '=' + v for k, v in d.items()])
+
+# isinstance() 判断对象类型是否为指定值
+x = 'abc'
+y = 123
+print(isinstance(x, int))
+print(isinstance(y, int))
+
+L1 = ['Hello', 'World', 18, 'Apple', None]
+print([v for v in L1 if isinstance(v, str)])
+'''
+
+
+'''
+# 判断对象是否为可迭代
+from collections import Iterable
+print(isinstance('abc', Iterable))
+print(isinstance([1, 2, 3], Iterable))
+print(isinstance(123, Iterable))
+
+# enumerate() 将 list 变成 索引-元素对
+# index 由 0 开始， list 内的元素变为 value
+for i, value in enumerate(['A', 'b', 'C']):
+    print(i, value)
 
 # 迭代
+d = {'a': 1, 'b': 2, 'c': 3}
+for key in d:
+    print(key, d[key])
 
+'''
 
 '''
 # 切片
