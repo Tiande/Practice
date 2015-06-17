@@ -27,7 +27,7 @@ print(isinstance(x, int))
 print(isinstance(y, int))
 
 L1 = ['Hello', 'World', 18, 'Apple', None]
-print([v for v in L1 if isinstance(v, str)])
+print([v.lower() for v in L1 if isinstance(v, str)])
 '''
 
 
