@@ -3,6 +3,22 @@
 # http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+
+# 迭代器
+# Iterable
+from collections import Iterable
+print(isinstance([], Iterable))
+print(isinstance(100, Iterable))
+# Iterator
+from collections import Iterator
+print(isinstance([], Iterator))
+print(isinstance(100, Iterator))
+print(isinstance((x for x in range(10)), Iterator))
+
+
+
+
+
 '''
 # 杨辉三角
 def triangles():
