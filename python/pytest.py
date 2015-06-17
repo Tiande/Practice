@@ -1,9 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
+#"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
 
+
+
+
+
+'''
+import math
+
+def move(x, y, step, angle=0):
+    nx = x + step * math.cos(angle)
+    ny = y - step * math.sin(angle)
+    return nx, ny
+x, y = move(100, 100, 60, math.pi / 6)
+print(x, y)
+# 实际上返回的是 tuple
+r = move(100, 100, 60, math.pi / 6)
+print(r)
+'''
+
+
+
+
+'''
 def my_abs():
     pass
 print('pass',my_abs())
@@ -20,6 +42,7 @@ def my_abs(x):
 
 print(my_abs(-9))
 print(my_abs(12))
+'''
 
 
 '''
@@ -204,7 +227,7 @@ for l in L:
 # print('Hello World','\n')
 
 
-~/Practice/python/pytest.py
+# ~/Practice/python/pytest.py
 
 
 
