@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 #http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
+# 迭代
 
-# 切片
+
 '''
+# 切片
 L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
 r = []
 n = 3
@@ -18,7 +20,7 @@ print(L[-2:])
 print(L[-2:-1])
 '''
 
-
+'''
 N = list(range(100))
 # 前十个数，每两个取一个
 print(N[:10:2])
@@ -26,6 +28,12 @@ print(N[:10:2])
 print(N[::5])
 # 复制一个list
 print(N[:])
+# tuple
+print((0, 1, 2, 3, 4, 5)[:3])
+# 字符串可看成一种 list ，但操作结果仍是字符串
+print('ABCDEF'[:3])
+print('ABCDEFG'[::2])
+'''
 
 
 
