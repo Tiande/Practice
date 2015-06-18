@@ -17,6 +17,20 @@ from collections import Iterator
 print(isinstance([], Iterator))
 print(isinstance(100, Iterator))
 print(isinstance((x for x in range(10)), Iterator))
+# iter() 将 list dict str 等 iterable 变成 iterator
+print(isinstance(iter([]), Iterator))
+print(isinstance(iter('abc'), Iterator))
+## for 循环本质上就是通过不断调用 next() 实现的：
+for x in [1, 2, 3, 4, 5]:
+    pass
+
+it = iter([1, 2, 3, 4, 5])
+while True:
+    try:
+        x = next(it)
+    except StopIteration:
+        break
+
 
 
 
