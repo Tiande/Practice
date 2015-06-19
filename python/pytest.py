@@ -4,9 +4,18 @@
 
 
 
+# 高阶函数
+print(abs(-10))
+print(abs)
+x = abs(-10)
+f = abs
+print(f(-10))
+# 函数名其实是指向函数的变量
 
 
 
+
+'''
 # 迭代器
 # Iterable
 from collections import Iterable
@@ -30,7 +39,7 @@ while True:
         x = next(it)
     except StopIteration:
         break
-
+'''
 
 
 
