@@ -3,14 +3,172 @@
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+# struct
 
+## 准确地讲，Python没有专门处理字节的数据类型。但由于str既是字符串，又可以表示字节，所以，字节数组＝str。
+## 而在C语言中，我们可以很方便地用struct、union来处理字节，以及字节和int，float的转换。
+## 在Python中，比方说要把一个32位无符号整数变成字节，也就是4个长度的bytes，你得配合位运算符这么写：
+### >>> n = 10240099
+### >>> b1 = (n & 0xff000000) >> 24
+### >>> b2 = (n & 0xff0000) >> 16
+### >>> b3 = (n & 0xff00) >> 8
+### >>> b4 = n & 0xff
+### >>> bs = bytes([b1, b2, b3, b4])
+### >>> bs
+### b'\x00\x9c@c'
+
+import struct
+## 转换任意数据为 bytes （字节）
+### bits 字位 1bytes = 8bits
+### 1B = 8b
+
+print(struct.pack('>I', 10240099))
+
+### pack的第一个参数是处理指令，'>I'的意思是：
+### >表示字节顺序是big-endian，也就是网络序，I表示4字节无符号整数。
+### 后面的参数个数要和处理指令一致。
+
+## unpack把bytes变成相应的数据类型：
+print(struct.unpack('>IH', b'\xf0\xf0\xf0\xf0\x80\x80'))
+### 根据>IH的说明，后面的bytes依次变为I：4字节无符号整数和H：2字节无符号整数。
+
+## 首先找一个bmp文件，没有的话用“画图”画一个。 读入前30个字节来分析：
+s = b'\x42\x4d\x38\x8c\x0a\x00\x00\x00\x00\x00\x36\x00\x00\x00\x28\x00\x00\x00\x80\x02\x00\x00\x68\x01\x00\x00\x01\x00\x18\x00'
+
+### BMP格式采用小端方式存储数据，文件头的结构按顺序如下：
+###
+### 两个字节：'BM'表示Windows位图，'BA'表示OS/2位图；
+### 一个4字节整数：表示位图大小；
+### 一个4字节整数：保留位，始终为0；
+### 一个4字节整数：实际图像的偏移量；
+### 一个4字节整数：Header的字节数；
+### 一个4字节整数：图像宽度；
+### 一个4字节整数：图像高度；
+### 一个2字节整数：始终为1；
+### 一个2字节整数：颜色数。
+###
+### 所以，组合起来用unpack读取：
+
+print(struct.unpack('<ccIIIIIIHH', s))
+
+
+
+
+
+
+'''
+# base64
+import base64
+print(base64.b64encode(b'binary\x00string'))
+print(base64.b64decode(b'YmluYXJ5AHN0cmluZw=='))
+
+## 由于标准的Base64编码后可能出现字符+和/，在URL中就不能直接作为参数，所以又有一种"url safe"的base64编码，其实就是把字符+和/分别变成-和_:
+print(base64.urlsafe_b64encode(b'i\xb7\x1d\xfb\xef\xff'))
+print(base64.urlsafe_b64decode('abcd--__'))
+
+## Base64是一种通过查表的编码方法，不能用于加密，即使使用自定义的编码表也不行。 Base64适用于小段内容的编码，比如数字证书签名、Cookie的内容等。 由于=字符也可能出现在Base64编码中，但=用在URL、Cookie里面会造成歧义，所以，很多Base64编码后会把=去掉
+
+## 请写一个能处理去掉=的base64解码函数：
+import base64
+def safe_base64_decode(s):
+    """docstring for safe_base64_decode"""
+    x = (-len(s)) % 4
+    s = s + b'=' * x
+    return base64.b64encode(s)
+print(safe_base64_decode(b'YWJjZA'))
+print(safe_base64_decode(b'YWJjZA=='))
+'''
+
+
+
+
+
+
+'''
+# collections 集合模块
+## namedtuple
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(1, 2)
+print(p.x, ' ', p.y)
+print(isinstance(p, Point))
+print(isinstance(p, tuple))
+### circle
+Circle = namedtuple('Circle', ['x', 'y', 'r'])
+
+## deque
+## 使用list存储数据时，按索引访问元素很快，但是插入和删除元素就很慢了，因为list是线性存储，数据量大的时候，插入和删除效率很低。 deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈：
+### 除了支持 list 的 append() pop() 还支持 appendleft() popleft()
+from collections import deque
+q = deque(['a', 'b', 'c'])
+q.append('x')
+q.appendleft('y')
+
+## defaultdict
+## dict 出现 KeyError 时返回默认值
+from collections import defaultdict
+dd = defaultdict(lambda: 'N/A')
+dd['key1'] = 'abc'
+dd['key2'] # 会返回默认值
+
+## OrderedDict
+## 保持 Key 的顺序
+## OrderedDict 的 Key 按照插入的顺序排列，而非 Key 本身排序
+from collections import OrderedDict
+d = dict([('a', 1), ('b', 2), ('c', 3)])
+od = OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+
+## OrderedDict 实现一个 FIFO (先进先出) 的 dict， 当容量超出限制，先删除最早添加的 Key
+## 删除老的，插入新的
+from collections import OrderedDict
+class LastUpdatedOrderedDict(OrderedDict):
+
+    def __init__(self, capacity):
+        super(LastUpdatedOrderedDict, self).__init__()
+        self._capacity = capacity
+
+    def __setitem__(self, key, value):
+        containsKey = 1 if key in self else 0
+        if len(self) - containsKey >= self._capacity:
+            last = self.popitem(last=False)
+            print('remove', last)
+        if containsKey:
+            del self[key]
+            print('set:', (key, value))
+        else:
+            print('add:', (key, value))
+        OrderedDict.__setitem__(self, key, value)
+
+## Counter
+## 计数器
+## 实际上是 dict 的子类
+from collections import Counter
+c = Counter()
+for ch in 'programming':
+    c[ch] = c[ch] + 1
+'''
+
+
+
+'''
 # 高阶函数
+## 变量指向函数
 print(abs(-10))
 print(abs)
 x = abs(-10)
 f = abs
 print(f(-10))
-# 函数名其实是指向函数的变量
+## 函数名其实是指向函数的变量
+abs = 10
+print(abs)
+# 注：由于abs函数实际上是定义在__builtin__模块中的，所以要让修改abs变量的指向在其它模块也生效，要用__builtin__.abs = 10
+## 传入函数
+## 一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数
+def add(x, y, f):
+    """docstring for add"""
+    return f(x) + f(y)
+print(-5, 6, abs)
+'''
 
 
 
