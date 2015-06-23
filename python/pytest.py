@@ -3,6 +3,12 @@
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+
+
+
+
+
+```
 # struct
 
 ## 准确地讲，Python没有专门处理字节的数据类型。但由于str既是字符串，又可以表示字节，所以，字节数组＝str。
@@ -19,7 +25,8 @@
 
 import struct
 ## 转换任意数据为 bytes （字节）
-### bits 字位 1bytes = 8bits
+### bits 字位
+### 1bytes = 8bits
 ### 1B = 8b
 
 print(struct.pack('>I', 10240099))
@@ -47,11 +54,26 @@ s = b'\x42\x4d\x38\x8c\x0a\x00\x00\x00\x00\x00\x36\x00\x00\x00\x28\x00\x00\x00\x
 ### 一个2字节整数：始终为1；
 ### 一个2字节整数：颜色数。
 ###
+### (共30个字节)
+###
 ### 所以，组合起来用unpack读取：
 
 print(struct.unpack('<ccIIIIIIHH', s))
 
+# 请编写一个bmpinfo.py，可以检查任意文件是否是位图文件，如果是，打印出图片大小和颜色数。
 
+import struct
+
+with open('a.bmp','rb') as f:
+    s = f.read(30)
+
+print('a.bmp 的头 30 字节(bytes) 为： ', s)
+
+s = struct.unpack('<ccIIIIIIHH', s)
+if s[0] + s[1] == b'BM' or s[0] + s[1] == b'BA':
+    print('This is a bmp')
+    print(s)
+```
 
 
 
@@ -72,7 +94,7 @@ print(base64.urlsafe_b64decode('abcd--__'))
 import base64
 def safe_base64_decode(s):
     """docstring for safe_base64_decode"""
-    x = (-len(s)) % 4
+    x = (-len(s)) % 4 # 负数取模 -7 % 4 = -2 * 4 + 1
     s = s + b'=' * x
     return base64.b64encode(s)
 print(safe_base64_decode(b'YWJjZA'))
@@ -158,15 +180,10 @@ print(abs)
 x = abs(-10)
 f = abs
 print(f(-10))
-<<<<<<< HEAD
-# 函数名其实是指向函数的变量
-'''
-    abs = 10
-    abs(-10)
-'''
 
 
-=======
+
+
 ## 函数名其实是指向函数的变量
 abs = 10
 print(abs)
@@ -178,7 +195,6 @@ def add(x, y, f):
     return f(x) + f(y)
 print(-5, 6, abs)
 '''
->>>>>>> 9a26694534d89013e0adb4b434a525b9d1d4008b
 
 
 
