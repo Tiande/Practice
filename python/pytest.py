@@ -3,12 +3,121 @@
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+# filter()
+
+
+
+
+'''
+# map()
+def f(x):
+    """map test"""
+    return x * x
+
+r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+print(r)
+print(list(r))
+
+L = []
+for n in [1, 2, 3, 4, 5, 6, 7, 8, 9]:
+    L.append(f(n))
+print(L)
+
+## 数字转字符串
+print(list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
+
+# reduce()
+## reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)
+from functools import reduce
+jdef add(x, y):
+    """sum"""
+    return x + y
+print(reduce(add, [1, 3, 5, 7, 9]))
+
+def fn(x, y):
+    """拼数字串"""
+    return x * 10 + y
+print(reduce(fn, [1, 3, 5, 7, 9]))
+
+def fn(x, y):
+    """to int"""
+    return x * 10 + y
+
+def char2num(s):
+    """char2num"""
+    return {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}[s]
+
+print(char2num('1'))
+print(reduce(fn, map(char2num, '13579')))
+
+def str2int(s):
+    """str to int"""
+    def fn(x, y):
+        return x * 10 + y
+    def char2num(s):
+        return {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}[s]
+    return reduce(fn, map(char2num, s))
+
+## 使用 lambda 简化
+def char2num(s):
+    return {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}[s]
+
+def str2int(s):
+    """docstring for str2int"""
+    return reduce(lambda x, y: x * 10 + y, map(char2num, s))
+
+print(list('testlist'))
+'''
+
+
+
+'''
+# map() 测试1： 规范英文名
+## ['adam', 'LISA', 'barT']
+## print([x for x in range(10)])
+## print('qewr'.capitalize())
+def normalize(name):
+    """docstring for normalize"""
+    return name.capitalize()
+L1 = ['adam', 'LISA', 'barT']
+L2 = list(map(normalize, L1))
+print(L2)
+
+# 练习2
+from functools import reduce
+def prod(L):
+    def fn(x, y):
+        return x * y
+    return reduce(fn, L)
+print(prod([3, 5, 7, 9]))
+
+# 练习3
+def str2float(s):
+    def zheng(x,y):
+        return x * 10 + y
+    def xiao(x,y):
+        return x/10 + y
+    def char2num(s):
+        return {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9 }[s]
+    i = s.find('.')
+    return(reduce(zheng,map(char2num,s[:i])) + reduce(xiao,map(char2num,s[-1:i:-1]))/10)
+
+print('str2float(\'123.456\') = ',str2float('123.456'))
+'''
 
 
 
 
 
-```
+
+
+
+
+
+
+
+
+'''
 # struct
 
 ## 准确地讲，Python没有专门处理字节的数据类型。但由于str既是字符串，又可以表示字节，所以，字节数组＝str。
@@ -73,7 +182,7 @@ s = struct.unpack('<ccIIIIIIHH', s)
 if s[0] + s[1] == b'BM' or s[0] + s[1] == b'BA':
     print('This is a bmp')
     print(s)
-```
+'''
 
 
 
