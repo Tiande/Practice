@@ -3,7 +3,150 @@
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+
+
+
+
+'''
+# 匿名函数 lambda
+print(list(map(lambda x: x * x, range(1, 10))))
+## 返回 lambda
+def build(x, y):
+    """docstring for build"""
+    return lambda: x * x + y * y
+'''
+
+'''
+# 返回函数
+def lazy_sum(*args):
+    """return func"""
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+f = lazy_sum(1, 3, 5, 7, 9)
+print(f())
+## 两次调用的非同一函数
+f1 = lazy_sum(1, 3, 5, 7, 9)
+f2 = lazy_sum(1, 3, 5, 7, 9)
+print(f1==f2)
+'''
+
+'''
+# 闭包 Closure
+## 全部都是9！原因就在于返回的函数引用了变量i，但它并非立刻执行。等到3个函数都返回时，它们所引用的变量i已经变成了3，因此最终结果为9。
+def count():
+    fs = []
+    for i in range(1, 4):
+        def f():
+            return i * i
+        fs.append(f)
+    return fs
+f1, f2, f3 = count()
+print(f1(), f2(), f3())
+'''
+
+'''
+def count():
+    def f(j):
+        def g():
+            return j*j
+        return g
+    fs = []
+    for i in range(1,4):
+        fs.append(f(i))
+    return fs
+f1, f2, f3 = count()
+print(f1(), f2(), f3())
+'''
+
+
+
+
+
+
+'''
+# sorted()
+print(sorted([36, 5, -12, 9, -21]))
+## 绝对值大小
+print(sorted([36, 5, -12, 9, -21], key=abs))
+## ASCII 'Z' < 'a' ，故 Z 在 a 前
+print(sorted(['bob', 'about', 'Zoo', 'Credit']))
+print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower))
+print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True))
+
+## 用一组tuple表示学生名字和成绩, 分别按名字排序,再按成绩从高到低排序
+L = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
+print(sorted(L, key=lambda t: t[0]))
+print(sorted(L, key=lambda t: t[1]))
+print(sorted(L, key=lambda t: t[1], reverse=True))
+'''
+
+
+
+
+
+
+'''
 # filter()
+# 返回的是 Iterator
+# 所以需要 list()
+## 返回奇数
+def is_odd(n):
+    """docstring for is_odd"""
+    return n % 2 == 1
+print(list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15])))
+
+## 去空字符串
+def not_empty(s):
+    """docstring for not_empty"""
+    return s and s.strip()
+print(list(filter(not_empty, ['A', '', 'B', None, 'C', ' '])))
+'''
+
+
+
+
+
+'''
+## 埃氏筛法 求 素数
+### 从 3 开始的奇数序列
+def _odd_iter():
+    n = 1
+    while True:
+        n = n + 2
+        yield n
+### 筛选函数
+def _not_divisible(n):
+    return lambda x: x % n > 0
+### 定义生成器
+def primes():
+    yield 2
+    it = _odd_iter() # 初始序列
+    while True:
+        n = next(it) # 返回序列的第一个数
+        yield n
+        it = filter(_not_divisible(n), it) # 构造新序列
+for n in primes():
+    if n < 100:
+        print(n)
+    else:
+        break
+'''
+
+'''
+# 回数
+def is_palindrome(n):
+    """docstring for is_palindrome"""
+    string = str(n)
+    return string == string[::-1]
+print(list(filter(is_palindrome, range(1, 1000))))
+'''
+
+
+
 
 
 
