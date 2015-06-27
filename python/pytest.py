@@ -6,6 +6,136 @@
 
 
 
+# 使用模块 Module
+
+
+
+
+
+
+
+'''
+# 偏函数 Partial function
+print(int('12345'), ' ', int('12345', base=8), ' ',  int('12345', 16))
+## def int2(x, base=2):
+##     """int2"""
+##     return int(x, base)
+import functools
+int2 = functools.partial(int, base=2)
+print(int2('1000000'))
+'''
+
+
+
+
+
+
+'''
+# 装饰器 Decorator
+def now():
+    """test"""
+    print('2015-06-27')
+f = now
+f()
+
+print(now.__name__)
+print(f.__name__)
+
+def log(func):
+    """decorator"""
+    def wrapper(*args, **kw):
+        """wrapper"""
+        print('call %s():' % func.__name__)
+        return func(*args, **kw)
+    return wrapper
+
+@log
+def now():
+    """print date"""
+    print('2015-06-27 19:15')
+now()
+## now = log(now)
+'''
+
+
+'''
+import functools # 导入 functools 模块
+def log(text):
+    """text log"""
+    def decorator(func):
+        """decorator"""
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+@log('execute')
+def now():
+    """date"""
+    print('2015-06-27 19:22')
+
+now()
+print(now.__name__)
+## now = log('execute')(now)
+'''
+
+
+'''
+import functools
+def logBoth(arg):
+    """logBoth"""
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            """wrapper"""
+            print('before call')
+            res = func(*args, **kw)
+            print('end call')
+            return res
+        return wrapper
+    if isinstance(arg, str):
+        print(arg)
+        return decorator
+    else:
+        print('doesn\'t have str')
+        return decorator(arg)
+
+@logBoth
+def now():
+    """docstring for now"""
+    print('2015-06-27 21:44')
+now()
+'''
+
+
+'''
+import functools
+
+def log(ins):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('begin call')
+            res = func(*args, **kw)
+            print('end call')
+            return res
+        return wrapper
+
+    if isinstance(ins, str):
+        print(ins)
+        return decorator
+    else:
+        return decorator(ins)
+
+@log
+def now():
+    print('2015')
+
+now()
+'''
+
+
 
 '''
 # 匿名函数 lambda
