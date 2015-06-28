@@ -2,7 +2,173 @@
 # -*- coding: utf-8 -*-
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
+
+
+
+# 定制类
+
+
+
+
+
+
+
+
+'''
+# 多重继承
+## MixIn
+class Dog(Mammal, RunnableMixIn, CarnivorusMixIn):
+'''
+
+
+# __slots__
+'''
+## 给实例绑定一个方法
+class Student(object):
+    pass
+
+s = Student()
+s.name = 'Michael'
+print(s.name)
+
+def set_age(self, age):
+    """set age"""
+    self.age = age
+
+from types import MethodType
+s.set_age = MethodType(set_age, s) # 给实例绑定一个方法
+s.set_age(25)
+print(s.age)
+
+def set_score(self, score):
+    """set score"""
+    self.score = score
+Student.set_score = MethodType(set_score, Student) # 给 class 绑定方法
+'''
+
+
+'''
+class Student(object):
+    __slots__ = ('name', 'age')
+s = Student()
+s.name = 'Michael'
+s.age = 25
+# s.socre = 99 # no score attr
+
+# __slots__ 对子类不起作用
+class GraduateStudent(Student):
+    pass
+g = GraduateStudent()
+g.score = 9999
+'''
+
+
+'''
+class Student(object):
+    def get_score(self):
+        """get score"""
+        return self._score
+    def set_score(self, value):
+        """set score"""
+        if not isinstance(value, int):
+            raise ValueError('score must be an int!')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100 !')
+        self._score = value
+
+s = Student()
+s.set_score(60)
+print(s.get_score())
+# s.set_score(9999)
+'''
+
+# @property 装饰器  将一个方法变成属性调用
+'''
+class Student(object):
+    @property
+    def score(self):
+        """score"""
+        return self._score
+    @score.setter
+    def score(self, value):
+        """score"""
+        if not isinstance(value, int):
+            raise ValueError('score must be an int')
+        if value < 0 or value > 100:
+            raise ValueError('score must between 0 ~ 100 !')
+        self._score = value
+
+s = Student()
+s.score = 60
+print(s.score)
+# s.score = 9999
+
+# 定义只读： 只定义 getter 方法， 不定义 setter 方法
+class Student(object):
+    @property
+    def birth(self):
+        """birth"""
+        return self._birth
+    @birth.setter
+    def birth(self, value):
+        """birth"""
+        self._birth = value
+
+    @property
+    def age(self):
+        """age"""
+        return 2015 - self._birth
+s = Student()
+s.birth = 1995
+print(s.age)
+'''
+
+'''
+class Screen(object):
+    @property
+    def width(self):
+        """width"""
+        return self._width
+    @width.setter
+    def width(self, value):
+        """set"""
+        self._width = value
+
+    @property
+    def height(self):
+        """height"""
+        return self._height
+    @height.setter
+    def height(self, value):
+        self._height = value
+
+    @property
+    def resolution(self):
+        """get"""
+        return self._width * self._height
+
+s = Screen()
+s.width = 1024
+s.height = 768
+print(s.resolution)
+# assert s.resolution == 786431, '1024 * 768 = %d ?' % s.resolution # 断言
+'''
+
+
+
+
+
+
+
+
+'''
 # 实例属性 和 类属性
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+class Student(object):
+    name = 'Student'
+'''
 
 
 # 获取对象信息
