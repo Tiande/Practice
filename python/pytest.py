@@ -2,14 +2,114 @@
 # -*- coding: utf-8 -*-
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
+# 实例属性 和 类属性
+
+
+# 获取对象信息
+'''
+print(type(123), ' ', type('123'), ' ', type(None), '\n', type(abs))
+print(type(123)==type(456))
+print(type(123)==int)
+'''
+
+## 判断对象是否为函数
+'''
+import types
+def fn():
+    """test"""
+    pass
+print(type(fn)==types.FunctionType)
+print(type(abs)==types.BuiltinFunctionType)
+print(type(lambda x: x)==types.LambdaType)
+print(type((x for x in range(10)))==types.GeneratorType)
+
+## 判断对象是否是某种类型 isinstance()
+print(isinstance('a', str))
+print(isinstance([1, 2, 3], (list, tuple)))
+
+## dir() 获得对象所属性和方法
+print(dir('ABC'))
+print(len('ABC'), ' ', 'ABC'.__len__())
+
+## len(XXX)==XXX.len()
+class MyDog(object):
+    def __len__(self):
+        return 100
+dog = MyDog()
+print(len(dog))
+'''
+
+'''
+## 操作对象的状态
+class MyObject(object):
+    def __init__(self):
+        self.x = 9
+    def power(self):
+        """power"""
+        return self.x * self.x
+obj = MyObject()
+print(hasattr(obj, 'x'), '\n', hasattr(obj, 'y'), '\n', setattr(obj, 'y', 19), '\n',  hasattr(obj, 'y'), '\n', getattr(obj, 'y'))
+print(obj.y)
+## getattr(obj, 'z') 不存在会报错
+print(getattr(obj, 'z', 404)) # 不存在，返回默认值
+fn = getattr(obj, 'power') # 获取属性
+print(fn)
+print(fn())
+'''
 
 
 
+
+
+
+
+# OOP Object Oriented Programming
+'''
+class Student(object):
+    def __init__(self, name, score):
+        self.__name = name # 加 __ 变为私有变量 private 若要删改，需设定 get set 方法
+        self.__score = score
+    def print_score(self):
+        """print"""
+        print('%s: %s' % (self.__name, self.__score))
+    def set_scoure(self, score):
+        if 0 <= score <= 100:
+            self.__scoure = score
+        else:
+            raise ValueError('bad score')
+
+bart = Student('Bart Simpson', 59)
+lisa = Student('Lisa Simpson', 87)
+bart.print_score()
+lisa.print_score()
+print(bart._Student__name) # __name 可用 _Student__name 来访问
+'''
+
+'''
+## 继承
+class Animal(object):
+    def run(self):
+        """run"""
+        print('Animal is running...')
+class Dog(Animal):
+    def run(self): # 覆写父类方法
+        """run"""
+        print('Dog is running...')
+class Cat(Animal):
+    pass
+dog = Dog()
+dog.run()
+cat = Cat()
+cat.run()
+'''
+
+
+
+
+
+# 安装第三方模块 pip
 
 # 使用模块 Module
-
-
-
 
 
 
