@@ -3,9 +3,173 @@
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
 
 
+# Enum
+'''
+from enum import Enum, unique
+
+Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+
+for name, member in Month.__members__.items():
+    print(name, '=>', member, ',', member.value)
+
+@unique
+class Weekday(Enum):
+    Sun = 0
+    Mon = 1
+    Tue = 2
+    Wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
+
+day1 = Weekday.Mon
+print(day1)
+print(Weekday.Tue)
+print(Weekday['Tue'])
+print(Weekday.Tue.value)
+print(day1 == Weekday.Mon, '\n', day1 == Weekday.Tue)
+print(Weekday(1))
+
+for name, member in Weekday.__members__.items():
+    print(name, '=>', member)
+
+print(type(Enum), '\n', type(Month))
+print(isinstance(Month.Jan, Month), '\n', isinstance(Month.Jan, Enum))
+'''
+
+
+
 
 
 # 定制类
+'''
+class Student(object):
+    def __init__(self, name):
+        """__init__"""
+        self.name = name
+
+    def __str__(self):
+        return 'Student object (name: %s)' % self.name
+
+    __repr__ = __str__ # 简单粗暴解决 直接显示变量 问题
+
+print(Student('Michael'))
+s = Student('Michael')
+s # 此时在 IDE 中仍会返回 <__main__.Student object at 0x109afb310>, 因为直接显示变量调用的不是 __str__()， 而是 __repr__()
+'''
+
+'''
+# Fib 虽能作用于 for 循环，但仍不能当作 list 使用.  Fib()[5] 会报错
+class Fib(object):
+    def __init__(self):
+        self.a, self.b = 0, 1
+
+    def __iter__(self):
+        """该方法返回一个迭代对象"""
+        return self
+
+    def __next__(self):
+        """__next__"""
+        self.a, self.b = self.b, self.a + self.b
+        if self.a > 10000:
+            raise StopIteration(); # 停止迭代
+        return self.a
+
+for n in Fib():
+    print(n)
+'''
+
+
+'''
+class Fib(object):
+    def __getitem__(self, n):
+        """需判断是否为切片参数"""
+        a, b = 1, 1
+        if isinstance(n, int):
+            for x in range(n):
+                a, b = b, a + b
+            return a
+        if isinstance(n, slice): # 切片
+            start = n.start
+            stop = n.stop
+            if start is None:
+                start = 0
+            L = []
+            for x in range(stop):
+                if x >= start:
+                    L.append(a)
+                a, b = b, a + b
+            return L
+
+
+f = Fib()
+print(f[10])
+print(f[0:5])
+# f[:10:2] 并没有对 step 参数作处理
+# __setitem__() 把对象视作 list 或 dict 来对集合赋值
+# __delitem__() 用于删除某个元素
+'''
+
+
+'''
+class Student(object):
+    def __init__(self):
+        """__init__"""
+        self.name = 'Michael'
+    def __getattr__(self, attr):
+        """调用不存在的属性时，解释器调用此方法尝试获取属性,且此方法默认返回 None """
+        if attr=='score':
+            return 99
+        if attr=='age':
+            return lambda: 25
+        raise AttributeError('\'Student\' object has no attribute \'%s\'' % attr)
+
+s = Student()
+print(s.name)
+print(s.score)
+print(s.age())
+print(s.abc)
+'''
+
+
+'''
+## 链式调用
+class Chain(object):
+
+    def __init__(self, path=''):
+        self._path = path
+
+    def __getattr__(self, path):
+        return Chain('%s/%s' % (self._path, path))
+
+    def __str__(self):
+        return self._path
+
+    __repr__ = __str__
+
+print(Chain().status.user.timeline.list)
+
+
+class Student(object):
+    def __init__(self, name):
+        """__init__"""
+        self.name = name
+
+    def __call__(self):
+        """对实例进行调用的方法__call__"""
+        print('My name is %s.' % self.name)
+
+s = Student('Michael')
+s()
+
+print('测试是否为 可调用 对象', '\n', callable(abs), '\n',callable([1, 2, 3]))
+'''
+
+
+
+
+
+
 
 
 
