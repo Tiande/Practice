@@ -36,7 +36,6 @@ class Weather(object):
         if data['errMsg']!='success':
             print('\n  ʕ •ᴥ•ʔ  竟然让我出错了，好好反思下再运行吧！阿西巴! \n')
             os._exit(0)
-            # raise ValueError('030 出现了无法调和的错误')
         return data['retData']
 
     def show_out(self, retData):
