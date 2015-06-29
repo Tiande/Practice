@@ -1,6 +1,7 @@
 #!usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Tiande's weather api practice.
+# https://github.com/Tiande
 # http://apistore.baidu.com/apiworks/servicedetail/112.html
 
 __author__ = 'Tiande'
@@ -33,7 +34,7 @@ class Weather(object):
         response = urllib.request.urlopen(request)
         data = json.loads(response.read().decode('utf8'))
         if data['errMsg']!='success':
-            print('\n  ʕ •ᴥ•ʔ  竟然让我出错了，好好反思下再运行！ \n')
+            print('\n  ʕ •ᴥ•ʔ  竟然让我出错了，好好反思下再运行吧！阿西巴! \n')
             os._exit(0)
             # raise ValueError('030 出现了无法调和的错误')
         return data['retData']
