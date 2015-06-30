@@ -1,6 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #"http:/"/www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316399410395f704750ee9440228135925a6ca1dad8000
+import sys
+sys.path.append('lib')
+
+
+# 使用元类
+## type()
+class Hello(object):
+    def hello(self, name='world'):
+        print('Hello, %s.' % name)
+h = Hello()
+h.hello()
+print(type(Hello))
+print(type(h))
+
+
+
+
+
 
 
 # Enum

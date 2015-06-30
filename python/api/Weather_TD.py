@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Tiande's weather api practice.
 # https://github.com/Tiande
