@@ -14,6 +14,7 @@ import urllib.parse
 import json
 import sys
 
+# 获取由命令行传入的字符串
 def getDic(args):
     dic = ''
     for item in sys.argv[1:argvLen+1]:
@@ -35,7 +36,8 @@ basic = content['basic'] if 'basic' in content else {}
 # 获取网络释义 list
 webValue = content['web'] if 'web' in content else ''
 
-space = '            '
+# 格式化的空格
+space = '      '
 
 # 打印翻译的方法
 def printTrans(lst):
@@ -46,7 +48,7 @@ def printTrans(lst):
 def printBasic(dic):
     seq = ''
     for (key, value) in sorted(dic.items(), key=lambda dic: dic[0]): # .items() 转为元组数组 tuple; sorted 排序
-        seq += '  ' + key + ':\n'
+        seq += '  「' + key + '」\n'
         if isinstance(value, list):
             for item in value:
                 seq += space  + item + '\n'
@@ -61,7 +63,7 @@ def printWebValue(lst):
         seq = ''
         for (key, value) in sorted(dic, key=lambda dic: dic[0]):
             if key=='key':
-                seq += '  ' +  value + '\n'
+                seq += '  「' + value + '」\n'
             elif key=='value':
                 seq += space
                 for item in value:
@@ -69,11 +71,11 @@ def printWebValue(lst):
         print(seq)
 
 # 显示结果
-print('\n翻译： ')
+print('\n[[翻译]]')
 printTrans(translation)
 
-print('\n基本词典： ')
+print('\n[[基本词典]]')
 printBasic(basic)
 
-print('网络释义： ')
+print('[[网络释义]]')
 printWebValue(webValue)
