@@ -5,7 +5,89 @@ import sys
 sys.path.append('lib')
 
 
+# 调试
+## 断言
+## 启用解释器时可以用 -0 参数关闭 assert
+def foo(s):
+    """docstring for foo"""
+    n = int(s)
+    assert n != 0, 'n is zero!'
+    return 10 / n
+
+def main():
+    """docstring for main"""
+    foo('0')
+
+## logging
+import logging
+logging.basicConfig(level=logging.INFO)
+s = '0'
+n = int(s)
+logging.info('n = %d' % n)
+print(10 / n)
+
+
+
+
+'''
+# 错误 、 调试 、测试
+try:
+    print('try...')
+    r = 10 / int('2') # 10 / 2
+    print('result: ', r)
+except ValueError as e:
+    print('ValueError: ', e)
+except ZeroDivisionError as e:
+    print('except: ', e)
+else:
+    print('no error!')
+finally:
+    print('finally...')
+print('END')
+
+# 记录错误
+import logging
+
+def foo(s):
+    """docstring for foo"""
+    return 10 / int(s)
+
+def bar(s):
+    """docstring for bar"""
+    return foo(s) * 2
+
+def main():
+    """docstring for main"""
+    try:
+        bar('0')
+    except Exception as e:
+        logging.exception(e)
+
+main()
+print('END')
+
+# 抛出错误
+class FooError(ValueError):
+    pass
+def foo(s):
+    """docstring for foo"""
+    n = int(s)
+    if n==0:
+        raise FooError('invalid value: %s' % s)
+    return 10 / n
+foo('0')
+'''
+
+
+
+
+
+
+
+
+
 # 使用元类
+'''
 ## type()
 class Hello(object):
     def hello(self, name='world'):
@@ -14,7 +96,17 @@ h = Hello()
 h.hello()
 print(type(Hello))
 print(type(h))
+'''
 
+'''
+"""use type() create a class"""
+def fn(self, name='world'):
+    print('Hello, %s.' % name)
+
+Hello = type('Hello', (object,), dict(hello=fn)) # (类名， 继承类， 绑定方法名)
+'''
+
+# metaclass 跳过
 
 
 
