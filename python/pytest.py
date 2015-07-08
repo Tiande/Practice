@@ -5,9 +5,19 @@ import sys
 sys.path.append('lib')
 
 
+# 单元测试
+
+
+
+
+
+
+
+
 # 调试
 ## 断言
 ## 启用解释器时可以用 -0 参数关闭 assert
+'''
 def foo(s):
     """docstring for foo"""
     n = int(s)
@@ -25,7 +35,15 @@ s = '0'
 n = int(s)
 logging.info('n = %d' % n)
 print(10 / n)
-
+'''
+# pdb
+'''
+import pdb
+s = '0'
+n = int(s)
+pdb.set_trace()
+print(10 / n)
+'''
 
 
 
