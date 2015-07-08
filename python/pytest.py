@@ -5,7 +5,125 @@ import sys
 sys.path.append('lib')
 
 
+# 序列化
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+# 操作文件和目录
+import os
+print(os.uname())
+# print(os.environ)
+print(os.environ.get('PATH'))
+
+print(os.path.abspath('.'))
+print(os.path.join('/home/tiande/Practice/python', 'testdir'))
+os.mkdir('/home/tiande/Practice/python/testdir')
+os.rmdir('/home/tiande/Practice/python/testdir')
+
+print(os.path.split('/home/tiande/Practice/python/testdir'))
+print(os.path.splitext('/home/tiande/Practice/python/test.txt'))
+with open('test.txt', 'w') as f:
+    f.write('This is a test txt for test.\n')
+os.rename('test.txt', 'test.py')
+os.remove('test.py')
+with open('test.py', 'w') as f:
+    f.write('This is a test txt for test.\n')
+os.rename('test.py', 'test.txt')
+
+print([x for x in os.listdir('.') if os.path.isdir(x)])
+print([x for x in os.listdir('.') if os.path.splitext(x)[1]=='.py'])
+
+os.system('dir -l --color=auto')
+os.system('find . -name *%s*' % input('输入你要查询的关键字：\n'))
+'''
+
+
+
+
+
+
+
+
+
+# StringIO
+'''
+from io import StringIO
+f = StringIO()
+print(f.write('hello'))
+print(f.getvalue())
+
+f1 = StringIO('Hello!\nHi!\nGoodbye!')
+while True:
+    s = f1.readline()
+    if s == '':
+        break
+    print(s.strip())
+
+# BytesIO
+from io import BytesIO
+f = BytesIO()
+print(f.write('中文'.encode('utf-8')))
+print(f.getvalue())
+'''
+
+
+
+
+
+
+
+
+# IO
+'''
+f = open('./test.txt', 'r')
+print(f.read())
+f.close()
+
+with open('./test.txt', 'r') as f:
+    print(f.read())
+
+f = open('./test.txt', 'r')
+for line in f.readlines():
+    print(line.strip()) # 去掉末尾的 \n
+
+# file-like Object
+
+f = open('./img/a.jpg', 'rb') # 二进制读取
+print(f.read())
+f.close()
+'''
+
+# encoding
+'''
+with open('./test.txt', 'r', encoding='gbk', errors='ignore') as f:
+    print(f.read())
+'''
+
+'''
+with open('./test.txt', 'w+') as f:
+    f.write('Hello, world!')
+with open('./test.txt', 'r') as f:
+    print(f.read())
+'''
+
+
+
+
+
+
 # 单元测试
+# 文档测试
 
 
 
