@@ -5,7 +5,100 @@ import sys
 sys.path.append('lib')
 
 
+
+# 多进程 multiprocessing
+'''
+import os
+print('Process (%s) start...' % os.getpid())
+pid = os.fork()
+print(pid)
+if pid==0:
+    print('I am child process (%s) and my parent is %s.' % (os.getpid(), os.getppid()))
+else:
+    print('I (%s) just created a child process (%s).' % (os.getpid(), pid))
+'''
+
+# Process 创建进程
+'''
+import os
+from multiprocessing import Process
+
+def run_proc(name):
+    """docstring for run_proce"""
+    print('Run child process %s (%s)...' % (name, os.getpid()))
+
+if __name__=='__main__':
+    print('Parent process %s.' % os.getpid())
+    p = Process(target=run_proc, args=('test',))
+    print('Child process will start.')
+    p.start()
+    p.join() # 等待子进程结束
+    print('Child process end.')
+'''
+
+
+# Pool
+from multiprocessing import Pool
+import os, time, random
+
+def long_time_task(name):
+    """docstring for long_time_task"""
+    print('Run task %s (%s)...' % (name, os.getpid()))
+    start = time.time()
+    time.sleep(random.random() * 3)
+    end = time.time()
+    print('Task %s runs %0.2f seconds.' % (name, (end - start)))
+
+if __name__=='__main__':
+    print('Parent process %s.' % os.getpid())
+    p = Pool(4)
+    for i in range(5):
+        p.apply_async(long_time_task, args=(i,))
+    print('Waiting for all subprocesses done...')
+    p.close()
+    p.join()
+    print('All subprocesses done.')
+
+
+
+
+
+
+
+
+
 # 序列化
+'''
+# pickling unpickling
+import pickle
+d = dict(name='Bob', age=20, score=88)
+print(pickle.dumps(d))
+
+with open('dump.txt', 'wb') as f:
+    pickle.dump(d, f)
+
+# loads() 将 bytes 反序列化为对象
+# load() 直接操作 file-like Object
+with open('dump.txt', 'rb') as f:
+    d = pickle.load(f)
+print(d)
+'''
+
+# json
+'''
+import json
+d = dict(name='Bob', age=20, score=88)
+print(json.dumps(d))
+
+json_str = '{"age":20, "SCORE": 88, "NAME": "Bob"}'
+print(json.loads(json_str))
+
+# print(json.dumps(s, default=student2dict)) # 自定义对象的转换函数
+
+# 把任意 class 实例变为 dict
+# print(json.dumps(s, default=lambda obj: obj.__dict__))
+'''
+
 
 
 
