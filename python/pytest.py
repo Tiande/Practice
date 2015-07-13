@@ -6,6 +6,36 @@ sys.path.append('lib')
 
 
 
+# 多线程
+import time, threading
+
+def loop():
+    """新线程执行的代码"""
+    print('thread %s is running...' % threading.current_thread().name)
+    n = 0
+    while n < 5:
+        n = n + 1
+        print('thread %s >>> %s' % (threading.current_thread().name, n))
+        time.sleep(1)
+    print('thread %s ended.' % threading.current_thread().name)
+
+print('thread %s is running...' % threading.current_thread().name)
+t = threading.Thread(target=loop, name=('LoopThread'))
+t.start()
+t.join()
+print('thread %s ended.' % threading.current_thread().name)
+
+
+
+
+
+
+
+
+
+
+
+
 # 多进程 multiprocessing
 '''
 import os
@@ -38,6 +68,7 @@ if __name__=='__main__':
 
 
 # Pool
+'''
 from multiprocessing import Pool
 import os, time, random
 
@@ -58,6 +89,74 @@ if __name__=='__main__':
     p.close()
     p.join()
     print('All subprocesses done.')
+'''
+
+
+'''
+from multiprocessing import Process
+import os
+
+def run_proc(name):
+        print("name=%s,PID=%s"%(name,os.getpid()))
+
+print(os.getpid())
+p=Process(target=run_proc,args=('aaaa',))
+p.start()
+p.join()
+print('Child process end.')
+if __name__=='__main__':
+'''
+
+
+'''
+# 子进程
+import subprocess
+
+# print('$ nslookup www.baidu.com')
+# r = subprocess.call(['nslookup', 'www.baidu.com'])
+# print('Exit code: ', r)
+
+print('$ nslookup')
+p = subprocess.Popen(['nslookup'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+output, err = p.communicate(b'set q=mx\nbaidu.com\nexit\n')
+print(output.decode('utf-8'))
+print('Exit code: ', p.returncode)
+'''
+
+
+'''
+# 进程间通信
+from multiprocessing import Process, Queue
+import os, time, random
+
+def write(q):
+    """写数据进程执行的代码"""
+    print('Process to write: %s' % os.getpid())
+    for value in ['A', 'B', 'C']:
+        print('Put %s to queue...' % value)
+        q.put(value)
+        time.sleep(random.random())
+
+def read(q):
+    """读数据进程执行的代码"""
+    print('Process to read: %s' % os.getpid())
+    while True:
+        value = q.get(True)
+        print('Get %s from queue.' % value)
+
+if '__main__'==__name__:
+    q = Queue()
+    pw = Process(target=write, args=(q,))
+    pr = Process(target=read, args=(q,))
+    pw.start()
+    pr.start()
+    pw.join()
+    pr.terminate() # 强行终止死循环
+'''
+
+
+
+
 
 
 
