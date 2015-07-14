@@ -7,6 +7,7 @@ sys.path.append('lib')
 
 
 # 多线程
+'''
 import time, threading
 
 def loop():
@@ -24,6 +25,44 @@ t = threading.Thread(target=loop, name=('LoopThread'))
 t.start()
 t.join()
 print('thread %s ended.' % threading.current_thread().name)
+'''
+
+# Lock
+'''
+lock = threading.Lock()
+def run_thread(n):
+    """lock"""
+    for i in range(10000):
+        lock.acquire()
+        try:
+            change_it(n)
+        finally:
+            lock.release()
+'''
+
+# ThreadLocal
+'''
+import threading
+local_school = threading.local()
+
+def process_student():
+    """获取当前线程关联的 student"""
+    std = local_school.student
+    print('Hello, %s (in %s)' % (std, threading.current_thread().name))
+
+def process_thread(name):
+    """绑定 ThreadLocal 的 student"""
+    local_school.student = name
+    process_student()
+
+t1 = threading.Thread(target=process_thread, args=('Alice',), name='Thread-A')
+t2 = threading.Thread(target=process_thread, args=('Bob',), name='Thread-B')
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+'''
+
 
 
 
