@@ -6,6 +6,131 @@ sys.path.append('lib')
 
 
 
+
+# HTMLParser
+from html.parser import HTMLParser
+from html.entities import name2codepoint
+
+class MyHTMLParser(HTMLParser):
+
+    def handle_starttag(self, tag, attrs):
+        """docstring for handle_starttag"""
+        print('<%s>' % tag)
+
+    def handle_endtag(self, tag):
+        """docstring for handle_endtag"""
+        print('</%s>' % tag)
+
+    def handle_startendtag(self, tag, attrs):
+        """docstring for handle_startendtag"""
+        print('<%s/>' % tag)
+
+    def handle_data(self, data):
+        """docstring for handle_data"""
+        print(data)
+
+    def handle_comment(self, data):
+        """docstring for handle_comment"""
+        print('<--', data, '-->')
+
+    def handle_entityref(self, name):
+        """docstring for handle_entityref"""
+        print('&%s' % name)
+
+    def handle_charref(self, name):
+        """docstring for handle_charref"""
+        print('&#%s;' % name)
+
+parser = MyHTMLParser()
+parser.feed('''<html>
+<head></head>
+<body>
+<!-- test html parser -->
+    <p>Some <a href=\"#\">html</a> HTML&nbsp;tutorial...<br>END</p>
+</body></html>''')
+
+
+
+
+# XML
+## DOM
+## SAX
+
+
+
+
+
+
+'''
+# itertools
+import itertools
+natuals = itertools.count(1)
+for n in natuals:
+    print(n)
+
+cs = itertools.cycle('ABC')
+ns = itertools.repeat('A', 3)
+
+ns = itertools.takewhile(lambda x: x <= 10, natuals)
+list(ns)
+
+for c in itertools.chain('ABC', 'XYZ'):
+    print(c)
+
+for key, group in itertools.groupby('AaaBBbcCAAa', lambda c: c.upper()):
+    print(key, list(group))
+'''
+
+
+
+
+
+
+'''
+# hashlib
+import hashlib
+md5 = hashlib.md5()
+md5.update('how to use md5 in python hashlib?'.encode('utf-8'))
+print(md5.hexdigest())
+
+sha1 = hashlib.sha1()
+
+def calc_md5(password):
+    """The-Salt"""
+    return get_md5(password + 'the-Salt')
+'''
+
+
+'''
+# datetime
+from datetime import datetime
+now = datetime.now()
+now.timestamp()
+datetime.fromtimestamp(1429417200.0)
+datetime.utcfromtimestamp(1429417200.0)
+datetime.strptime('2015-6-1 18:19:59', '%Y-%m-%d %H:%M:%S')
+now.strftime('%a, %b %d %H:%M')
+
+from datetime import timedelta
+now + timedelta(days=2, hours=12)
+
+from datetime import timezone
+tz_utc_8 = timezone(timedelta(hours=8))
+dt = now.replace(tzinfo=tz_utc_8)
+
+# 时区转换
+utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
+bj_dt = utc_dt.astimezone(timezone(timedelta(hours=8)))
+tokyo_dt = utc_dt.astimezone(timezone(timedelta(hours=9)))
+tokyo_dt2 = bj_dt.astimezone(timezone(timedelta(hours=9)))
+'''
+
+
+
+
+
+
+
 # 多线程
 '''
 import time, threading
