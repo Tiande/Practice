@@ -7,47 +7,155 @@ sys.path.append('lib')
 
 
 
+
+
+# socket
+'''
+# TCP
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(('www.sina.com.cn', 80))
+s.send(b'GET / HTTP/1.1\r\nHost: www.sina.com.cn\r\nConnection: close\r\n\r\n')
+
+buffer = []
+while True:
+    d = s.recv(1024)
+    if d:
+        buffer.append(d)
+    else:
+        break
+
+data = b''.join(buffer)
+s.close()
+header, html = data.split(b'\r\n\r\n', 1)
+print(header.decode('utf-8'))
+with open('sina.html', 'wb') as f:
+    f.write(html)
+'''
+
+
+
+
+# GUI
+'''
+from tkinter import *
+import tkinter.messagebox as messagebo
+
+class Application(Frame):
+    def __init__(self, master=None):
+        """docstring for __init__"""
+        Frame.__init__(self, master)
+        self.pack()
+        self.createWidgets()
+
+    def createWidgets(self):
+        """docstring for createWidgets"""
+        self.nameInput = Entry(self)
+        self.nameInput.pack()
+        self.alertButton = Button(self, text='Hello',  command=self.hello)
+        self.alertButton.pack()
+        self.helloLabel = Label(self, text='Hello, world!')
+        self.helloLabel.pack()
+        self.quitButton = Button(self, text='Quit', command=self.quit)
+        self.quitButton.pack()
+
+    def hello(self):
+        """docstring for hello"""
+        name = self.nameInput.get() or 'world'
+        messagebox.showinfo('Message', 'Hello, %s' % name)
+
+app = Application()
+app.master.title('Hello World')
+app.mainloop()
+'''
+
+
+
+
+
+# PIL
+'''
+from PIL import Image
+im = Image.open('img/a.jpg')
+w, h = im.size
+print('Original image size: %sx%s' % (w, h))
+im.thumbnail((w//2, h//2))
+im.save('img/thumbnail.jpg', 'jpeg')
+
+from PIL import ImageFilter
+# im = Image.open('img/a.jpg')
+im2 = im.filter(ImageFilter.BLUR)
+im2.save('img/blur.jpg', 'jpeg')
+
+from PIL import ImageDraw, ImageFont, ImageFilter
+import random
+def rndChar():
+    """random word"""
+    return chr(random.randint(65, 90))
+def rndColor():
+    """random color"""
+    return (random.randint(64, 255), random.randint(64, 255), random.randint(64, 255))
+def rndColor2():
+    """random color"""
+    return (random.randint(32, 127), random.randint(32, 127), random.randint(32, 127))
+width = 60 * 4
+height = 60
+image = Image.new('RGB', (width, height), (255, 255, 255))
+font = ImageFont.truetype('Arial.ttf', 36)
+draw = ImageDraw.Draw(image)
+for x in range(width):
+    for y in range(height):
+        draw.point((x, y), fill=rndColor())
+for t in range(4):
+    draw.text((60 * t + 10, 10), rndChar(), font=font, fill=rndColor2())
+image = image.filter(ImageFilter.BLUR)
+image.save('img/code.jpg', 'jpeg')
+'''
+
+
+
 # HTMLParser
-from html.parser import HTMLParser
-from html.entities import name2codepoint
-
-class MyHTMLParser(HTMLParser):
-
-    def handle_starttag(self, tag, attrs):
-        """docstring for handle_starttag"""
-        print('<%s>' % tag)
-
-    def handle_endtag(self, tag):
-        """docstring for handle_endtag"""
-        print('</%s>' % tag)
-
-    def handle_startendtag(self, tag, attrs):
-        """docstring for handle_startendtag"""
-        print('<%s/>' % tag)
-
-    def handle_data(self, data):
-        """docstring for handle_data"""
-        print(data)
-
-    def handle_comment(self, data):
-        """docstring for handle_comment"""
-        print('<--', data, '-->')
-
-    def handle_entityref(self, name):
-        """docstring for handle_entityref"""
-        print('&%s' % name)
-
-    def handle_charref(self, name):
-        """docstring for handle_charref"""
-        print('&#%s;' % name)
-
-parser = MyHTMLParser()
-parser.feed('''<html>
-<head></head>
-<body>
-<!-- test html parser -->
-    <p>Some <a href=\"#\">html</a> HTML&nbsp;tutorial...<br>END</p>
-</body></html>''')
+# from html.parser import HTMLParser
+# from html.entities import name2codepoint
+#
+# class MyHTMLParser(HTMLParser):
+#
+#     def handle_starttag(self, tag, attrs):
+#         """docstring for handle_starttag"""
+#         print('<%s>' % tag)
+#
+#     def handle_endtag(self, tag):
+#         """docstring for handle_endtag"""
+#         print('</%s>' % tag)
+#
+#     def handle_startendtag(self, tag, attrs):
+#         """docstring for handle_startendtag"""
+#         print('<%s/>' % tag)
+#
+#     def handle_data(self, data):
+#         """docstring for handle_data"""
+#         print(data)
+#
+#     def handle_comment(self, data):
+#         """docstring for handle_comment"""
+#         print('<--', data, '-->')
+#
+#     def handle_entityref(self, name):
+#         """docstring for handle_entityref"""
+#         print('&%s' % name)
+#
+#     def handle_charref(self, name):
+#         """docstring for handle_charref"""
+#         print('&#%s;' % name)
+#
+# parser = MyHTMLParser()
+# parser.feed('''<html>
+# <head></head>
+# <body>
+# <!-- test html parser -->
+#     <p>Some <a href=\"#\">html</a> HTML&nbsp;tutorial...<br>END</p>
+# </body></html>''')
 
 
 
