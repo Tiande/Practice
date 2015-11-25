@@ -16,6 +16,13 @@ int main(void)
     else{
         printf("z=%f+%fi\n", z.x, z.y);
     }
+    
+    // 初始化
+    struct complex_struct w = { 3.0, 4.0 };
+    struct complex_struct w1 = { x, 4.0, };
+    struct complex_struct w2 = { 3.0, };
+    struct complex_struct w3 = { 0 };
+
     return 0;
 }
 
