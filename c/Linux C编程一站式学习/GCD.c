@@ -1,6 +1,7 @@
 /*
  * GCD: Greatest Common Divisor
  * 最大公因数
+ * Euclid算法
  */
 #include <stdio.h>
 
