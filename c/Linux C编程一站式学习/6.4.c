@@ -11,7 +11,7 @@ int main()
     int m,i,k;
     printf("请输入一个整数：");
     scanf("%d", &m);
-    k = (int)sqrt(m);
+    k = (int)sqrt(m); //sqrt. Computes square root of arg. 
     for (i = 2; i <= k; i++) {
         if (0 == m%i) {
             break;
