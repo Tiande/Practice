@@ -25,7 +25,15 @@ void print_random()
 
 int main(void)
 {
+    int i, histogram[10] = {0}; //histogram 直方图 使用前必须初始化
+
     gen_random(10);
     print_random();
+
+    // 统计各数岀现次数
+    for (i = 0; i < N; i++) {
+        histogram[a[i]]++;
+    }
+
     return 0;
 }
