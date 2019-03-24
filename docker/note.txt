@@ -1,0 +1,23 @@
+COPY sources.list /etc/apt/
+RUN apt-get update&& \
+    apt-get install -y XXX
+
+# bind history
+--mount type=bind,source=$HOME/.bash_history,target=/root/.bash_history
+
+# DNS
+/etc/docker/daemon.json
+{
+    "dns" : [
+        "114.114.114.114",
+            "8.8.8.8"
+
+    ]
+
+}
+
+ENV http_proxy http://proxy:8080
+
+# 在容器内使用 Host 代理
+docker run --network host
+ALL_PROXY=http://192.168.31.53
